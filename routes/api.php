@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AvatarController;
 use App\Services\AvatarGenerator;
+use App\Services\Initials;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::get('/hello', function () {
     // $reesponse =  Http::dd('http://avatary.test/api/initials');
 
     // ddd($reesponse);
-    $omg = new AvatarGenerator(name:"hello", background_color:"fafafa");
-    return $omg->generateColor();
+    // $omg = new AvatarGenerator(name:"hello", background_color:"fafafa");
+    // return $omg->generateColor();
+
+    return Initials::generate('مرحبا بالعالم');
 });

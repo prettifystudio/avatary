@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\User;
+use ArPHP\I18N\Arabic;
 use Illuminate\Support\Facades\Route;
-
+use AtmCode\ArPhpLaravel\ArPhpLaravel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test', function(){
+
+    return (ArPhpLaravel::utf8Glyphs("قصي فريضي"));
+
+});
+

@@ -30,10 +30,31 @@ class AvatarGenerator
     }
 
 
+    private function getName()
+    {
+        if(strlen($this->name) < 2){
+            return Initials::generate('John Doe');
+        }
+    
+        return Initials::generate($this->name);
+    }
+
+
     private function initCanvas(): ImageCanvas
     {
         return Image::canvas($this->size * 2 + 6, $this->size * 2 + 6);
     }
+
+
+    private function getShape()
+    {
+        if($this->shape === 'circle'){
+            return $this->drawrCircleShape();
+        }else{
+            return $this->drawrRectangleShape();
+        }
+    }
+
 
     private function drawrRectangleShape(): ImageCanvas
     {
@@ -57,12 +78,14 @@ class AvatarGenerator
 
     private function getText(ImageCanvas $canvas)
     {
-        $canvas->text($this->getInitialsFromString(), $this->size, $this->size, function (Font $font) {
+        $canvas->text($this->getName(), $this->size, $this->size, function (Font $font) {
             $font->file(public_path('/Roboto-Regular.ttf'));
             $font->size($this->size);
             $font->color($this->text_color);
             $font->valign('middle');
             $font->align('center');
+            $font->angle(360);
+
         });
 
         return $canvas;
@@ -71,23 +94,12 @@ class AvatarGenerator
 
     private function drawText()
     {
-        $canvas = $this->drawrCircleShape();
+        $canvas = $this->getShape();
         $canvas = $this->getText($canvas);
-
         return $canvas;
     }
 
-    private function getInitialsFromString()
-    {
-        if (Str::wordCount($this->name) == 1) {
-            $name = Str::upper(Str::substr($this->name, 0, 2));
-        } else {
-            $exploded_name = Str::of($this->name)->explode(' ');
-            $name = Str::upper($exploded_name[0][0].$exploded_name[1][0]);
-        }
-        return $name;
-    }
-
+    
 
     public function generate()
     {

@@ -25,12 +25,6 @@ class AvatarController extends Controller
 
     public function initials(Request $request)
     {
-        // // $this->validate($request, [
-        // //     'size' => 'integer|max:960',
-        // //     'name' => 'sometimes|regex:/^[A-Za-z ]*$/|min:2',
-        // //     'bgcolor' => ['regex: /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/'],
-        // //     'text_color' => ['regex: /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/']
-        // // ]);
 
         $name = $request->query('name', 'John Doe');
         $background_color = $request->query('bgcolor', 'random');
