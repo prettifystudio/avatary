@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\AvatarController;
+use App\Service\ColorPicker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AvatarController;
+use App\Services\AvatarGenerator;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/initials', [AvatarController::class, 'initials']);
 
-Route::get('/hello', function(){
-    $reesponse =  Http::dd('http://avatary.test/api/initials');
+Route::get('/hello', function () {
+    // $reesponse =  Http::dd('http://avatary.test/api/initials');
 
-    ddd($reesponse);
+    // ddd($reesponse);
+    $omg = new AvatarGenerator(name:"hello", background_color:"fafafa");
+    return $omg->generateColor();
 });
