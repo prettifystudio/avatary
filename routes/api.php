@@ -26,12 +26,3 @@ use App\Services\Initials;
 
 Route::get('/initials', [AvatarController::class, 'initials'])->name('generateInitials');
 
-Route::get('/hello', function () {
-    // $reesponse =  Http::dd('http://avatary.test/api/initials');
-
-    // ddd($reesponse);
-    // $omg = new AvatarGenerator(name:"hello", background_color:"fafafa");
-    // return $omg->generateColor();
-
-    return Initials::generate('مرحبا بالعالم');
-});
