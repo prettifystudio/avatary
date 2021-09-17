@@ -4,12 +4,7 @@ namespace App\Services;
 
 class Initials {
 
-    /**
-     * Generate initials from a name
-     *
-     * @param string $name
-     * @return string
-     */
+    
     public static function generate(string $name) : string
     {
         $words = explode(' ', $name);
@@ -19,12 +14,7 @@ class Initials {
         return self::makeInitialsFromSingleWord($name);
     }
 
-    /**
-     * Make initials from a word with no spaces
-     *
-     * @param string $name
-     * @return string
-     */
+    
     protected static function makeInitialsFromSingleWord(string $name) : string
     {
         preg_match_all('#([A-Zaz]+)#', $name, $capitals);

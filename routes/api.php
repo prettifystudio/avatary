@@ -24,7 +24,7 @@ use App\Services\Initials;
 // });
 
 
-Route::get('/initials', [AvatarController::class, 'initials']);
+Route::get('/initials', [AvatarController::class, 'initials'])->name('generateInitials');
 
 Route::get('/hello', function () {
     // $reesponse =  Http::dd('http://avatary.test/api/initials');
