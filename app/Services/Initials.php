@@ -17,7 +17,7 @@ class Initials {
     
     protected static function makeInitialsFromSingleWord(string $name) : string
     {
-        preg_match_all('#([A-Zaz]+)#', $name, $capitals);
+        preg_match_all('#([A-Z]+)#', $name, $capitals);
         if (count($capitals[1]) >= 2) {
             return mb_substr(implode('', $capitals[1]), 0, 2, 'utf-8');
         }

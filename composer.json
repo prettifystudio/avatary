@@ -36,9 +36,16 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "classmap": [
-            "app/Services"
+            "app/Services",
+            "app/helpers.php"
         ]
     },
+
+    "files": [
+
+        "app/helpers.php"
+
+    ],
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

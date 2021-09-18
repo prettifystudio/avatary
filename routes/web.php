@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Services\Initials;
 use ArPHP\I18N\Arabic;
 use Illuminate\Support\Facades\Route;
 use AtmCode\ArPhpLaravel\ArPhpLaravel;
@@ -22,7 +23,16 @@ Route::get('/', function () {
 
 Route::get('/test', function(){
 
-    return (ArPhpLaravel::utf8Glyphs("قصي فريضي"));
-
+    return hello();
 });
+
+
+function makeInitialsFromSingleWord(string $name) : string
+{
+    preg_match_all('#([A-Z]+)#', $name, $capitals);
+    if (count($capitals[1]) >= 2) {
+        return mb_substr(implode('', $capitals[1]), 0, 2, 'utf-8');
+    }
+    return strtoupper(substr($name, 0, 2));
+}
 
