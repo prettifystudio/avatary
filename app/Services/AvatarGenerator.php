@@ -79,7 +79,7 @@ class AvatarGenerator
     private function getText(ImageCanvas $canvas)
     {
         $canvas->text($this->getName(), $this->size, $this->size, function (Font $font) {
-            $font->file(public_path('/Roboto-Regular.ttf'));
+            $font->file(public_path('/Cairo-Light.ttf'));
             $font->size($this->size);
             $font->color($this->text_color);
             $font->valign('middle');
