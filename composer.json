@@ -38,14 +38,15 @@
         "classmap": [
             "app/Services",
             "app/helpers.php"
+        ],
+        "files": [
+
+            "app/helpers.php"
+    
         ]
     },
 
-    "files": [
-
-        "app/helpers.php"
-
-    ],
+    
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
