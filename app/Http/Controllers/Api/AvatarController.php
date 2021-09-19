@@ -25,7 +25,6 @@ class AvatarController extends Controller
 
     public function initials(Request $request)
     {
-
         $name = $request->query('name', 'John Doe');
         $background_color = $request->query('bgcolor', 'random');
         $text_color = $request->query('color', 'fafafa');

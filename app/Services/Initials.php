@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-class Initials {
-
-    
-    public static function generate(string $name) : string
+class Initials
+{
+    public static function generate(string $name): string
     {
         $words = explode(' ', $name);
         if (count($words) >= 2) {
@@ -14,13 +13,13 @@ class Initials {
         return self::makeInitialsFromSingleWord($name);
     }
 
-    
-    protected static function makeInitialsFromSingleWord(string $name) : string
+
+    protected static function makeInitialsFromSingleWord(string $name): string
     {
         preg_match_all('#([A-Z]+)#', $name, $capitals);
         if (count($capitals[1]) >= 2) {
             return mb_substr(implode('', $capitals[1]), 0, 2, 'utf-8');
         }
-        return strtoupper(substr($name, 0, 2));
+        return strtoupper(mb_substr($name, 0, 2, 'utf-8'));
     }
 }

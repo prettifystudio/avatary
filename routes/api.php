@@ -1,12 +1,7 @@
 <?php
 
-use App\Service\ColorPicker;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AvatarController;
-use App\Services\AvatarGenerator;
-use App\Services\Initials;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +20,3 @@ use App\Services\Initials;
 
 
 Route::get('/initials', [AvatarController::class, 'initials'])->name('generateInitials');
-

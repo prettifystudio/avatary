@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 it('will return an ok status when the initials endpoint is called', function () {
     $response = $this->get(route('generateInitials'));

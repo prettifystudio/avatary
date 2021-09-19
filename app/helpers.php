@@ -1,7 +1,7 @@
 <?php
 
 
-if(!function_exists('mb_strrev')){
+if (!function_exists('mb_strrev')) {
     function mb_strrev(string $string): string
     {
         $r = '';
@@ -9,7 +9,6 @@ if(!function_exists('mb_strrev')){
             $r .= mb_substr($string, $i, 1);
         }
         return $r;
-    
     }
 }
 

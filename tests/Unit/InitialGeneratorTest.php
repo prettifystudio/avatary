@@ -20,11 +20,8 @@ it('generates an initial from three words name', function () {
     expect($initial)->toEqual("AE");
 });
 
-it('generates initial from arabic name hopefully', function () {
+it('generates initial from arabic name', function () {
     $name = "قصي فريضي";
     $initial = Initials::generate($name);
     expect($initial)->toEqual("قف");
 });
-
-
-

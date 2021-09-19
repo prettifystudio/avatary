@@ -19,8 +19,6 @@ class AvatarGenerator
         public string $shape ="circle",
         public int $size = 150,
     ) {
-        
-
     }
 
     public function generateColor()
@@ -32,13 +30,25 @@ class AvatarGenerator
 
     private function getName()
     {
-        if(strlen($this->name) < 2){
+        if (strlen($this->name) < 2) {
             return Initials::generate('John Doe');
         }
-    
+
+        if (preg_match('/\p{Arabic}/u', $this->name)) {
+            return mb_strrev(Initials::generate($this->name));
+        }
+
         return Initials::generate($this->name);
     }
 
+    private function getShape()
+    {
+        if ($this->shape === 'circle') {
+            return $this->drawrCircleShape();
+        } else {
+            return $this->drawrRectangleShape();
+        }
+    }
 
     private function initCanvas(): ImageCanvas
     {
@@ -46,20 +56,11 @@ class AvatarGenerator
     }
 
 
-    private function getShape()
-    {
-        if($this->shape === 'circle'){
-            return $this->drawrCircleShape();
-        }else{
-            return $this->drawrRectangleShape();
-        }
-    }
-
 
     private function drawrRectangleShape(): ImageCanvas
     {
         $canvas = $this->initCanvas();
-        $canvas->rectangle(0,0, $this->size * 2 + 6, $this->size * 2 + 6, function (RectangleShape $draw) {
+        $canvas->rectangle(0, 0, $this->size * 2 + 6, $this->size * 2 + 6, function (RectangleShape $draw) {
             $draw->background($this->generateColor());
         });
 
@@ -85,12 +86,10 @@ class AvatarGenerator
             $font->valign('middle');
             $font->align('center');
             $font->angle(360);
-
         });
 
         return $canvas;
     }
-
 
     private function drawText()
     {
@@ -98,8 +97,6 @@ class AvatarGenerator
         $canvas = $this->getText($canvas);
         return $canvas;
     }
-
-    
 
     public function generate()
     {
