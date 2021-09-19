@@ -84,6 +84,9 @@ This project is made with the awesome frameworks/packages
 * [TailwindCSS](https://tailwindcss.com/)
 * [Intervention Images](http://image.intervention.io/)
 
+And this awesome Readme is made possible with :
+* [Best README Template](https://github.com/othneildrew/Best-README-Template)
+
 
 
 <!-- GETTING STARTED -->
