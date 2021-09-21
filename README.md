@@ -248,7 +248,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@PrettifyStudio](https://twitter.com/prettifystudio) - email@example.com
+Your Name - [@PrettifyStudio](https://twitter.com/prettifystudio) - hey@prettify.studio
 
 Project Link: [https://github.com/prettifystudio/avatary](https://github.com/prettifystudio/avatary)
 
