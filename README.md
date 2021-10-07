@@ -134,9 +134,9 @@ Since Avatary is built using Laravel 8, so the prerequisites are the same as the
    php artisan key:generate
    ```
 
-5. Generate application key
+5. Linking Storage folder to public
    ```sh
-   php artisan key:generate
+   php artisan storage:link
    ```
 6. Serve the application
    ```sh
