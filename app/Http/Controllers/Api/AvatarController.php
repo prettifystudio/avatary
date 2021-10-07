@@ -30,7 +30,15 @@ class AvatarController extends Controller
         $text_color = $request->query('color', 'fafafa');
         $shape = $request->query('shape', 'circle');
         $size = $request->query('size', 260);
+
+
+
+
+        // return (strlen($name));
+
+
         $image =  new AvatarGenerator(name: $name, background_color:$background_color, text_color:$text_color, shape:$shape, size:$size);
+
         return $image->generate();
     }
 }

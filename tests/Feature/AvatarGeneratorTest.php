@@ -57,3 +57,62 @@ it('will generate different images when the bgcolor params is missing', function
     ]));
     expect($fileContent)->not()->toEqual($response2->getContent());
 });
+
+
+
+
+it('generate an image when the params are null', function () {
+    $response = $this->get(route('generateInitials', [
+        'name' => null,
+        'bgcolor' => null,
+        'color' => null,
+        'size'=> NULL,
+        'shape'=>null
+    ]));
+
+    $response->assertHeader('Content-Type', 'image/png');
+});
+
+
+it('generate an image with false data', function () {
+    $response = $this->get(route('generateInitials', [
+        'name'=>'     a',
+        'bgcolor'=>'helloworld',
+        'color' => 'doge_coin_to_the_moon',
+        'size' => 555,
+        'shape' => 'triangle'
+    ]));
+    $response->assertHeader('Content-Type', 'image/png');
+});
+
+
+it('generates an image with 150px size when given size is over 512px or below 50px', function () {
+    $response =$this->get(route('generateInitials', [
+        'size' => 150,
+        'bgcolor' => 'f44f44'
+    ]));
+
+    $imageToCompare = $response->getContent();
+    $response =$this->get(route('generateInitials', [
+        'size' => 513,
+        'bgcolor' => 'f44f44'
+    ]));
+
+    $imageOver512px = $response->getContent();
+
+    $response2 =$this->get(route('generateInitials', [
+        'size' => 49,
+        'bgcolor' => 'f44f44'
+    ]));
+
+    $imageBelow50xp = $response2->getContent();
+
+    expect($imageOver512px)->toEqual($imageToCompare);
+    expect($imageBelow50xp)->toEqual($imageToCompare);
+    expect($imageBelow50xp)->toEqual($imageOver512px);
+});
+
+
+
+
+

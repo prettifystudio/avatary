@@ -25,3 +25,10 @@ it('generates initial from arabic name', function () {
     $initial = Initials::generate($name);
     expect($initial)->toEqual("قف");
 });
+
+it('generates initials from compound arabic names', function () {
+    $name = "عبد الحميد أكبر";
+    $initial = Initials::generate($name);
+    expect($initial)->toEqual("عأ");
+});
+

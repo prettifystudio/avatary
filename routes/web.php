@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/test', function(){
+    $image = Storage::disk('public')->get('/initials/initials.png');
+    // return $image;
+
+    return response($image)->header('Content-Type', 'image/png');
+});

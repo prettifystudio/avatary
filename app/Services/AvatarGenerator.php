@@ -13,24 +13,40 @@ use Intervention\Image\Gd\Shapes\RectangleShape;
 class AvatarGenerator
 {
     public function __construct(
-        public string $name,
-        public string $background_color = "f44336",
-        public string $text_color ="fafafa",
-        public string $shape ="circle",
-        public int $size = 150,
+        public ?string $name ="John Doe",
+        public ?string $background_color = "f44336",
+        public ?string $text_color ="fafafa",
+        public ?string $shape ="circle",
+        public mixed $size = 150,
     ) {
     }
 
-    public function generateColor()
+    public function generateBackgroundColor()
     {
-        $this->background_color !== 'random' ?: $this->background_color = ColorPicker::pick()  ;
+        if (! ColorPicker::check($this->background_color)) {
+            return ColorPicker::pick();
+        }
+
+        if ($this->background_color === 'random' || is_null($this->background_color)) {
+            return ColorPicker::pick();
+        }
         return $this->background_color;
+    }
+
+
+
+    private function getTextColor()
+    {
+        if (!ColorPicker::check($this->text_color)) {
+            return "fafafa";
+        }
+        return $this->text_color;
     }
 
 
     private function getName()
     {
-        if (strlen($this->name) < 2) {
+        if (strlen($this->name) < 2 || strlen($this->name) === 0) {
             return Initials::generate('John Doe');
         }
 
@@ -41,18 +57,37 @@ class AvatarGenerator
         return Initials::generate($this->name);
     }
 
+
+
+
+    private function getSize()
+    {
+        if (is_null($this->size) || ($this->size > 512) || $this->size < 50) {
+            return 150;
+        }
+        return $this->size;
+    }
+
+
+
+
+
+
+
+
+
     private function getShape()
     {
-        if ($this->shape === 'circle') {
-            return $this->drawrCircleShape();
-        } else {
+        if ($this->shape === 'rectangle') {
             return $this->drawrRectangleShape();
+        } else {
+            return $this->drawrCircleShape();
         }
     }
 
     private function initCanvas(): ImageCanvas
     {
-        return Image::canvas($this->size * 2 + 6, $this->size * 2 + 6);
+        return Image::canvas($this->getSize() * 2 + 6, $this->getSize() * 2 + 6);
     }
 
 
@@ -60,8 +95,8 @@ class AvatarGenerator
     private function drawrRectangleShape(): ImageCanvas
     {
         $canvas = $this->initCanvas();
-        $canvas->rectangle(0, 0, $this->size * 2 + 6, $this->size * 2 + 6, function (RectangleShape $draw) {
-            $draw->background($this->generateColor());
+        $canvas->rectangle(0, 0, $this->getSize() * 2 + 6, $this->getSize() * 2 + 6, function (RectangleShape $draw) {
+            $draw->background($this->generateBackgroundColor());
         });
 
         return $canvas;
@@ -70,8 +105,8 @@ class AvatarGenerator
     private function drawrCircleShape(): ImageCanvas
     {
         $canvas = $this->initCanvas();
-        $canvas->circle($this->size*2, $this->size + 3, $this->size + 3, function (CircleShape $draw) {
-            $draw->background($this->generateColor());
+        $canvas->circle($this->getSize()*2, $this->getSize() + 3, $this->getSize() + 3, function (CircleShape $draw) {
+            $draw->background($this->generateBackgroundColor());
         });
 
         return $canvas;
@@ -79,10 +114,10 @@ class AvatarGenerator
 
     private function getText(ImageCanvas $canvas)
     {
-        $canvas->text($this->getName(), $this->size, $this->size, function (Font $font) {
+        $canvas->text($this->getName(), $this->getSize(), $this->getSize(), function (Font $font) {
             $font->file(public_path('/Cairo-Light.ttf'));
-            $font->size($this->size);
-            $font->color($this->text_color);
+            $font->size($this->getSize());
+            $font->color($this->getTextColor());
             $font->valign('middle');
             $font->align('center');
             $font->angle(360);
@@ -101,7 +136,7 @@ class AvatarGenerator
     public function generate()
     {
         $canvas = $this->drawText();
-        $canvas->resize($this->size, $this->size);
+        $canvas->resize($this->getSize(), $this->getSize());
         return $canvas->response('png');
     }
 }

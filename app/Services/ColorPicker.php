@@ -6,6 +6,8 @@ use Illuminate\Support\Arr;
 
 class ColorPicker
 {
+    public const pattern = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$^";
+
     public const colors = [
         '#F44336',
         '#FFEBEE',
@@ -261,11 +263,15 @@ class ColorPicker
         '#455A64',
         '#37474F',
         '#263238',
-
         ];
 
     public static function pick()
     {
         return Arr::random(self::colors);
+    }
+
+    public static function check($string)
+    {
+        return preg_match(self::pattern, $string);
     }
 }
