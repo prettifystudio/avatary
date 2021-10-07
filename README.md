@@ -99,7 +99,7 @@ To get a local copy up and running follow these simple example steps.
 
 Since Avatary is built using Laravel 8, so the prerequisites are the same as the framework
 
-* PHP >= 7.3
+* PHP >= 8.0
 * BCMath PHP Extension
 * Ctype PHP Extension
 * Fileinfo PHP Extension
