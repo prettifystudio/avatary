@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 TODO.md
+.php-cs-fixer.cache
