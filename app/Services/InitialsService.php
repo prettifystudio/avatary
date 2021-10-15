@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class Initials
+class InitialsService
 {
     public static function generate(string $name): string
     {
@@ -14,7 +14,7 @@ class Initials
     }
 
 
-    protected static function makeInitialsFromSingleWord(string $name): string
+    private static function makeInitialsFromSingleWord(string $name): string
     {
         preg_match_all('#([A-Z]+)#', $name, $capitals);
         if (count($capitals[1]) >= 2) {

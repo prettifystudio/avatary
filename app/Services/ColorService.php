@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Illuminate\Support\Arr;
 
-class ColorPicker
+class ColorService
 {
     public const pattern = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$^";
 

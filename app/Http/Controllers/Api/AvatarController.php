@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use F9Web\ApiResponseHelpers;
 use App\Http\Controllers\Controller;
 use App\Services\AvatarGenerator;
+use App\Services\AvatarService;
 use Illuminate\Support\Facades\Validator;
 
 class AvatarController extends Controller
 {
-    use ApiResponseHelpers;
 
 
     /**
@@ -37,7 +36,7 @@ class AvatarController extends Controller
         // return (strlen($name));
 
 
-        $image =  new AvatarGenerator(name: $name, background_color:$background_color, text_color:$text_color, shape:$shape, size:$size);
+        $image =  new AvatarService(name: $name, background_color:$background_color, text_color:$text_color, shape:$shape, size:$size);
 
         return $image->generate();
     }

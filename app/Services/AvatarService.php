@@ -4,13 +4,14 @@ namespace App\Services;
 
 use Illuminate\Support\Str;
 use App\Service\ColorPicker;
+use App\Service\ColorService;
 use Intervention\Image\Gd\Font;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\Image as ImageCanvas;
 use Intervention\Image\Gd\Shapes\CircleShape;
 use Intervention\Image\Gd\Shapes\RectangleShape;
 
-class AvatarGenerator
+class AvatarService
 {
     public function __construct(
         public ?string $name ="John Doe",
@@ -23,12 +24,12 @@ class AvatarGenerator
 
     public function generateBackgroundColor()
     {
-        if (! ColorPicker::check($this->background_color)) {
-            return ColorPicker::pick();
+        if (! ColorService::check($this->background_color)) {
+            return ColorService::pick();
         }
 
         if ($this->background_color === 'random' || is_null($this->background_color)) {
-            return ColorPicker::pick();
+            return ColorService::pick();
         }
         return $this->background_color;
     }
@@ -37,7 +38,7 @@ class AvatarGenerator
 
     private function getTextColor()
     {
-        if (!ColorPicker::check($this->text_color)) {
+        if (!ColorService::check($this->text_color)) {
             return "fafafa";
         }
         return $this->text_color;
@@ -47,14 +48,14 @@ class AvatarGenerator
     private function getName()
     {
         if (strlen($this->name) < 2 || strlen($this->name) === 0) {
-            return Initials::generate('John Doe');
+            return InitialsService::generate('John Doe');
         }
 
         if (preg_match('/\p{Arabic}/u', $this->name)) {
-            return mb_strrev(Initials::generate($this->name));
+            return mb_strrev(InitialsService::generate($this->name));
         }
 
-        return Initials::generate($this->name);
+        return InitialsService::generate($this->name);
     }
 
 
