@@ -219,6 +219,16 @@ GET https://avatary.prettify.studio/api/initials?name=Koussay%20Fridhi&size=125
 ```
 
 
+
+## Testing
+
+This application is using PestPHP for testing. In order to run the test suite
+```bash
+./vendor/bin/pest
+```
+
+
+
 <!-- ROADMAP -->
 ## Roadmap
 
