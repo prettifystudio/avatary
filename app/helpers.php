@@ -11,8 +11,3 @@ if (!function_exists('mb_strrev')) {
         return $r;
     }
 }
-
-function hello()
-{
-    return "hello";
-}
