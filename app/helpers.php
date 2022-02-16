@@ -1,6 +1,4 @@
 <?php
-
-
 if (!function_exists('mb_strrev')) {
     function mb_strrev(string $string): string
     {
